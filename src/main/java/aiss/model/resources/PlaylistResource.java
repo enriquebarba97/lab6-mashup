@@ -73,6 +73,7 @@ public class PlaylistResource {
 			cr.setEntityBuffering(true);		// Needed for using RESTlet from JUnit tests
 			cr.put(pl);
 			
+			
 		} catch (ResourceException re) {
 			System.err.println("Error when updating the playlist: " + cr.getResponse().getStatus());
 			success = false;

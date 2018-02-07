@@ -28,7 +28,7 @@ public class PlaylistNewController extends HttpServlet {
 		// Request data
 		String name = request.getParameter("name");
 
-		// Add song
+		// Add playlist
 		PlaylistResource plr = new PlaylistResource();
 		Playlist playlist = plr.addPlaylist(new Playlist(name));
 
