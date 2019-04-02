@@ -102,12 +102,31 @@ public class PlaylistResource {
 	public boolean addSong(String playlistId, String songId) {
 		// TODO
 		// Use	cr.post(" ") to avoid RESTlet crashing
-		return false;
+		ClientResource cr = null;
+		boolean success = true;
+		String uriFinal = uri + "/" + playlistId + "/" + songId;
+		try {
+			cr = new ClientResource(uriFinal);
+			cr.post(" ");
+		}catch(ResourceException re) {
+			System.err.println("Error when adding the song to the playlist: " + cr.getResponse().getStatus());
+			success = false;
+		}
+		return success;
 		
 	}
 	
 	public boolean removeSong(String playlistId, String songId) {
-		// TODO
-		return false;
+		ClientResource cr = null;
+		boolean success = true;
+		String uriFinal = uri + "/" + playlistId + "/" + songId;
+		try {
+			cr = new ClientResource(uriFinal);
+			cr.delete();
+		}catch(ResourceException re) {
+			System.err.println("Error when deleting the song from the playlist: " + cr.getResponse().getStatus());
+			success = false;
+		}
+		return success;
 	}
 }

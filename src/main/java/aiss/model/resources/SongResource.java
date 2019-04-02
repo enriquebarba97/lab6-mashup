@@ -32,19 +32,51 @@ public class SongResource {
 
 	public Song getSong(String songId) {
 		//TODO
-		return null;
+		ClientResource cr = null;
+		Song result = null;
+		String uriFinal = uri + "/" + songId;
+		try {
+			cr = new ClientResource(uriFinal);
+			result = cr.get(Song.class);
+		} catch(ResourceException re) {
+			System.err.println("Error when retrieving a song: " + cr.getResponse().getStatus());
+			throw re;
+		}
+		
+		return result;
 	}
 	
 
 	public Song addSong(Song song) {
 		// TODO
-		return null;
+		ClientResource cr = null;
+		Song result = song;
+		try {
+			cr = new ClientResource(uri);
+			result = cr.post(result, Song.class);
+		} catch(ResourceException re) {
+			System.err.println("Error when adding a song: " + cr.getResponse().getStatus());
+			throw re;
+		}
+		
+		return result;
 
 	}
 	
 	public boolean updateSong(Song song) {
 		// TODO
-		return false;
+		ClientResource cr = null;
+		Boolean success = true;
+		try {
+			cr = new ClientResource(uri);
+			cr.setEntityBuffering(true);
+			cr.put(song);
+		} catch(ResourceException re) {
+			System.err.println("Error when updating a song: " + cr.getResponse().getStatus());
+			success = false;
+		}
+		
+		return success;
 	}
 	
 
